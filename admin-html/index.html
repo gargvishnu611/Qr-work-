@@ -7,14 +7,22 @@
 <body>
 <header><div><strong>QR Work</strong><span>Admin workspace</span></div><a href="../">Open user site</a></header>
 <main>
-<section class="hero"><div><small>ADMIN</small><h1>Control center</h1><p>Manage tasks and withdrawal requests separately from the public website.</p></div><button id="refresh">Refresh</button></section>
+<section class="hero"><div><small>ADMIN</small><h1>Create & manage QR tasks</h1><p>Enter the QR content below, preview it, then publish it to the user website.</p></div><button id="refresh" type="button">Refresh</button></section>
 <section class="metrics"><div><span>Open tasks</span><b id="openCount">0</b></div><div><span>Pending review</span><b id="pendingCount">0</b></div><div><span>Accepted</span><b id="acceptedCount">0</b></div><div><span>Withdrawals</span><b id="withdrawalCount">0</b></div></section>
 <section class="grid">
-<div class="panel"><div class="panel-head"><div><small>NEW TASK</small><h2>Publish a task</h2></div></div>
-<form id="taskForm"><label>Task title<input id="taskTitle" placeholder="QR usability test" required></label><label>QR content / URL<input id="taskQr" placeholder="https://example.com/test" required></label><label>Reward (₹)<input id="taskReward" type="number" min="1" value="25" required></label><label>Duration (minutes)<input id="taskMinutes" type="number" min="1" value="10" required></label><label>Instructions<textarea id="taskInstructions" rows="4" placeholder="Explain the authorized test."></textarea></label><button class="primary" type="submit">Publish task</button></form></div>
-<div class="panel"><div class="panel-head"><div><small>TASK QUEUE</small><h2>Review work</h2></div></div><div id="tasks" class="list"></div></div>
+<div class="panel"><div class="panel-head"><div><small>NEW TASK</small><h2>Publish QR task</h2></div></div>
+<form id="taskForm">
+<label>Task title<input id="taskTitle" placeholder="QR usability test #001" required></label>
+<label>QR content / URL<input id="taskQr" placeholder="https://example.com/test" required></label>
+<div class="qr-preview"><span>QR PREVIEW</span><img id="qrPreview" alt="QR preview"><small>Whatever you enter above is encoded into this QR.</small></div>
+<label>Reward (₹)<input id="taskReward" type="number" min="1" value="25" required></label>
+<label>Duration (minutes)<input id="taskMinutes" type="number" min="1" value="10" required></label>
+<label>Instructions<textarea id="taskInstructions" rows="4" placeholder="Explain the authorized test."></textarea></label>
+<button class="primary" type="submit">Generate & Publish QR Task</button>
+</form></div>
+<div class="panel"><div class="panel-head"><div><small>TASK QUEUE</small><h2>Published tasks</h2></div></div><div id="tasks" class="list"></div></div>
 </section>
 <section class="panel"><div class="panel-head"><div><small>PAYOUTS</small><h2>Withdrawal requests</h2></div></div><div id="withdrawals" class="list"></div></section>
-<p class="warning">This admin page is a static frontend using browser localStorage. It is not secure authentication and should not be used to control real funds until connected to a protected backend.</p>
+<p class="warning">This admin page uses browser localStorage. It is a prototype and is not secure authentication for real-money operations.</p>
 </main><div id="toast"></div><script src="admin.js"></script>
 </body></html>
