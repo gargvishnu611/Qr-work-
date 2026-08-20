@@ -54,7 +54,6 @@ alter table public.qr_tasks enable row level security;
 alter table public.app_settings enable row level security;
 alter table public.withdrawals enable row level security;
 
--- Prototype policies. Tighten these before real production use.
 drop policy if exists "public read settings" on public.app_settings;
 create policy "public read settings" on public.app_settings for select to anon, authenticated using (true);
 drop policy if exists "public update settings" on public.app_settings;
@@ -81,10 +80,11 @@ create policy "public create withdrawals" on public.withdrawals for insert to an
 drop policy if exists "public update withdrawals" on public.withdrawals;
 create policy "public update withdrawals" on public.withdrawals for update to anon, authenticated using (true) with check (true);
 
--- Storage bucket for QR photos. Create it from the Storage UI if the insert below is unavailable.
+-- Create the public QR image bucket.
 insert into storage.buckets (id, name, public) values ('qr-tasks','qr-tasks',true)
 on conflict (id) do nothing;
 
+-- IMPORTANT: these policies must target storage.objects, not storage.buckets.
 drop policy if exists "public read qr files" on storage.objects;
 create policy "public read qr files" on storage.objects for select to anon, authenticated using (bucket_id = 'qr-tasks');
 drop policy if exists "public upload qr files" on storage.objects;
