@@ -1,0 +1,38 @@
+name: Validate QR Work frontend
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: JavaScript syntax
+        run: |
+          node --check app.js
+          node --check main-supabase.js
+          node --check supabase-client.js
+          node --check admin-html/admin.js
+          node --check admin-html/admin-features.js
+          node --check admin-html/admin-supabase.js
+      - name: Required files
+        run: |
+          test -f index.html
+          test -f app.js
+          test -f main-supabase.js
+          test -f supabase-client.js
+          test -f supabase-schema.sql
+          test -f admin-html/index.html
+          test -f admin-html/admin.js
+          test -f admin-html/admin-supabase.js
+      - name: Supabase script references
+        run: |
+          grep -q 'supabase-client.js' index.html
+          grep -q 'main-supabase.js' index.html
+          grep -q '../supabase-client.js' admin-html/index.html
+          grep -q 'admin-supabase.js' admin-html/index.html
