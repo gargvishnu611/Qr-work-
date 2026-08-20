@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#070a12" />
+  <meta name="description" content="QR Work — a modern QR testing workspace." />
+  <title>QR Work — Testing Workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+</head>
+<body>
+  <div class="noise"></div><div class="orb orb1"></div><div class="orb orb2"></div>
+  <div id="toast" class="toast"></div>
+
+  <section id="auth" class="auth-screen">
+    <div class="auth-card glass">
+      <div class="brand"><div class="logo">QR</div><div><strong>QR Work</strong><span>Testing workspace</span></div></div>
+      <div class="eyebrow">WELCOME</div>
+      <h1>Test smarter.<br><em>Move faster.</em></h1>
+      <p class="muted">A polished workspace for authorized QR and website usability testing.</p>
+      <div class="field"><label>Email</label><input id="email" type="email" value="tester@example.com" autocomplete="email"></div>
+      <div class="field"><label>Password</label><input id="password" type="password" value="password" autocomplete="current-password"></div>
+      <div class="field"><label>Workspace role</label><select id="role"><option value="tester">Tester</option><option value="admin">Administrator</option></select></div>
+      <button class="btn primary full" onclick="login()">Enter workspace <span>→</span></button>
+      <small class="notice">Demo authentication only. Connect a real auth provider before production.</small>
+    </div>
+  </section>
+
+  <section id="app" class="app hidden">
+    <aside class="sidebar glass">
+      <div class="brand"><div class="logo">QR</div><div><strong>QR Work</strong><span>Workspace</span></div></div>
+      <div class="user-card"><div id="avatar" class="avatar">T</div><div><strong id="userName">Tester</strong><span id="userRole">Online</span></div><i class="online"></i></div>
+      <nav id="nav">
+        <button class="nav active" data-page="dashboard"><b>⌂</b>Dashboard</button>
+        <button class="nav" data-page="work"><b>◈</b>Start Work</button>
+        <button class="nav" data-page="qr"><b>▣</b>QR Generator</button>
+        <button class="nav" data-page="history"><b>▤</b>History</button>
+        <button class="nav admin-only" data-page="admin"><b>⚙</b>Admin</button>
+      </nav>
+      <div class="side-bottom"><div class="health"><i></i><div><strong>System healthy</strong><span>All services ready</span></div></div><button class="logout" onclick="logout()">↪ Sign out</button></div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar"><div><span class="eyebrow" id="sectionEyebrow">TESTER SPACE</span><h2 id="pageTitle">Good to see you</h2></div><div class="top-actions"><span class="live"><i></i> LIVE</span><button class="kbd">⌘ K</button><div id="topAvatar" class="avatar">T</div></div></header>
+
+      <div id="dashboard" class="page">
+        <section class="hero glass">
+          <div class="hero-copy"><span class="eyebrow">SMART TESTING PLATFORM</span><h1>Everything you need.<br><em>Nothing in the way.</em></h1><p>Organize authorized QR tests, review results and track your workspace from one smooth interface.</p><div class="actions"><button class="btn primary" onclick="go('work')">Start Work →</button><button class="btn ghost" onclick="go('history')">View activity</button></div></div>
+          <div class="hero-art"><div class="ring r1"></div><div class="ring r2"></div><div class="float-card fc1">✓<span>Task accepted</span></div><div class="float-card fc2">₹20<span>Reward</span></div><div class="core">QR<span>+</span></div></div>
+        </section>
+        <section class="stats"><div class="stat glass"><span class="stat-icon">₹</span><small>Balance</small><strong id="balance">₹0</strong><em>↗ live</em></div><div class="stat glass"><span class="stat-icon">✓</span><small>Completed</small><strong id="completed">0</strong><em>↗ live</em></div><div class="stat glass"><span class="stat-icon">◷</span><small>Pending</small><strong id="pending">0</strong><em>↗ live</em></div><div class="stat glass"><span class="stat-icon">◈</span><small>Available</small><strong id="available">3</strong><em>↗ live</em></div></section>
+        <section class="columns"><div class="panel glass"><div class="panel-head"><div><span class="eyebrow">PERFORMANCE</span><h3>Weekly progress</h3></div><strong id="progressPct">0%</strong></div><div class="progress"><span id="progressBar"></span></div><div class="bars"><i style="height:35%"></i><i style="height:48%"></i><i style="height:42%"></i><i style="height:66%"></i><i style="height:57%"></i><i style="height:82%"></i><i id="lastBar" style="height:18%"></i></div></div><div class="panel glass"><div class="panel-head"><div><span class="eyebrow">RECENT</span><h3>Activity</h3></div><button class="link" onclick="go('history')">See all</button></div><div id="activity" class="activity"></div></div></section>
+      </div>
+
+      <div id="work" class="page hidden"><section class="columns work-columns"><div class="panel glass task-panel"><div class="panel-head"><div><span class="eyebrow">TASK CENTER</span><h3 id="taskTitle">QR usability test</h3></div><span id="taskStatus" class="pill">Ready</span></div><div id="taskReady"><div class="task-grid"><div class="qr-preview"><div id="taskQr"></div><small>Authorized test QR</small></div><div><h3>Website usability test</h3><p class="muted">Review the assigned instructions, scan the test QR only for the authorized test, then submit your result.</p><div class="meta"><span>Reward <b>₹20</b></span><span>Time <b>~10 min</b></span><span>Type <b>Usability</b></span></div><button class="btn primary" onclick="startTask()">Start task →</button></div></div></div><div id="taskWaiting" class="waiting hidden"><div class="timer" id="timer">00:10</div><h3>Preparing your task</h3><p class="muted">Please wait while the assignment timer runs.</p><div class="progress"><span id="waitBar"></span></div></div><div id="taskDone" class="waiting hidden"><div class="success-icon">✓</div><h3>Task ready for submission</h3><p class="muted">Your test window is complete. Submit the result for admin review.</p><button class="btn primary" onclick="submitTask()">Submit result →</button></div></div><div class="panel glass"><span class="eyebrow">GUIDE</span><h3>How it works</h3><div class="steps"><div><b>01</b><span>Start an available task</span></div><div><b>02</b><span>Review test instructions</span></div><div><b>03</b><span>Complete the authorized test</span></div><div><b>04</b><span>Submit for review</span></div></div><div class="safe-note">🔒 Never enter a password, OTP, UPI PIN or banking credentials into a testing task.</div></div></section></div>
+
+      <div id="qr" class="page hidden"><section class="panel glass qr-generator"><div class="panel-head"><div><span class="eyebrow">UTILITY</span><h3>QR Generator</h3></div><span class="pill">Local</span></div><p class="muted">Generate a QR for a URL or plain text you are authorized to share. No payment mandate is created by this page.</p><div class="qr-maker"><div><label>Content</label><textarea id="qrText" rows="4">https://example.com/test</textarea><div class="actions"><button class="btn primary" onclick="makeQr()">Generate QR</button><button class="btn ghost" onclick="clearQr()">Clear</button></div></div><div class="qr-output"><canvas id="qrCanvas"></canvas><small id="qrLabel">Ready</small></div></div></section></div>
+
+      <div id="history" class="page hidden"><section class="panel glass"><div class="panel-head"><div><span class="eyebrow">RECORDS</span><h3>Activity & transactions</h3></div><button class="btn primary small" onclick="withdraw()">Withdraw</button></div><div id="historyList" class="history-list"></div></section></div>
+
+      <div id="admin" class="page hidden"><section class="stats"><div class="stat glass"><span class="stat-icon">👥</span><small>Active testers</small><strong>1,248</strong><em>↗ 8.2%</em></div><div class="stat glass"><span class="stat-icon">◈</span><small>Open tasks</small><strong id="adminOpen">3</strong><em>↗ live</em></div><div class="stat glass"><span class="stat-icon">✓</span><small>Reviews</small><strong>86</strong><em>today</em></div><div class="stat glass"><span class="stat-icon">₹</span><small>Pending payouts</small><strong>₹12.4K</strong><em>queue</em></div></section><section class="columns"><div class="panel glass"><div class="panel-head"><div><span class="eyebrow">TASK MANAGEMENT</span><h3>Available tasks</h3></div><button class="btn primary small" onclick="createTask()">+ New task</button></div><div id="adminTasks" class="admin-tasks"></div></div><div class="panel glass"><span class="eyebrow">ADMIN ROLES</span><h3>Team access</h3><div class="admin-team"><div class="avatar">A</div><div class="avatar">B</div><div class="avatar">C</div><button onclick="toast('Connect your production directory to add admins.')">+</button></div><p class="muted">Use a real identity provider and server-side role checks before production.</p></div></section></div>
+    </main>
+  </section>
+  <script src="app.js"></script>
+</body>
+</html>
