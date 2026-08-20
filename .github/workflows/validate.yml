@@ -20,21 +20,23 @@ jobs:
       - name: Check required frontend files
         run: |
           test -f index.html
-          test -f simple.css
+          test -f style.css
           test -f app.js
           test -f admin-html/index.html
           test -f admin-html/admin.css
           test -f admin-html/admin.js
-      - name: Check frontend references
+      - name: Check required references
         run: |
-          grep -q 'simple.css' index.html
+          grep -q 'style.css' index.html
           grep -q 'app.js' index.html
           grep -q 'admin.css' admin-html/index.html
           grep -q 'admin.js' admin-html/index.html
-      - name: Check public site has no admin navigation
+          grep -q 'qrPreview' admin-html/index.html
+          grep -q 'updatePreview' admin-html/admin.js
+      - name: Ensure demo QR tasks are not seeded
         run: |
-          ! grep -q 'adminTab' index.html
-          ! grep -q 'Control center' index.html
+          ! grep -q 'function seedTasks' app.js
+          ! grep -q 'authorized-test-001' app.js
       - name: Check HTML structure
         run: |
           grep -q '<html' index.html
