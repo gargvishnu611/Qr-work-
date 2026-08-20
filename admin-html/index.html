@@ -8,11 +8,13 @@
 <header><div><strong>QR Work</strong><span>Admin workspace</span></div><a href="../">Open user site</a></header>
 <main>
 <section class="hero"><div><small>ADMIN</small><h1>Create & manage QR tasks</h1><p>Upload the QR image you want the tester to receive, then publish the task.</p></div><button id="refresh" type="button">Refresh</button></section>
+<section id="siteControl" class="panel"></section>
 <section class="metrics"><div><span>Open tasks</span><b id="openCount">0</b></div><div><span>Pending review</span><b id="pendingCount">0</b></div><div><span>Accepted</span><b id="acceptedCount">0</b></div><div><span>Withdrawals</span><b id="withdrawalCount">0</b></div></section>
 <section class="grid">
 <div class="panel"><div class="panel-head"><div><small>NEW TASK</small><h2>Publish QR task</h2></div></div>
 <form id="taskForm">
 <label>Task title<input id="taskTitle" placeholder="QR usability test #001" required></label>
+<label>Request ID (optional)<input id="taskRequestId" placeholder="Select an approved request below or leave blank"></label>
 <label>QR photo<input id="taskQrFile" type="file" accept="image/png,image/jpeg,image/webp" required></label>
 <div class="qr-preview"><span>QR PHOTO PREVIEW</span><img id="qrPreview" alt="Uploaded QR preview"><small>The exact uploaded QR photo will be shown to testers. Keep the QR fully visible and readable.</small></div>
 <label>Reward (₹)<input id="taskReward" type="number" min="1" value="25" required></label>
@@ -22,7 +24,8 @@
 </form></div>
 <div class="panel"><div class="panel-head"><div><small>TASK QUEUE</small><h2>Published tasks</h2></div></div><div id="tasks" class="list"></div></div>
 </section>
+<section class="panel"><div class="panel-head"><div><small>REQUESTS</small><h2>QR requests from users</h2></div></div><div id="qrRequests" class="list"></div></section>
 <section class="panel"><div class="panel-head"><div><small>PAYOUTS</small><h2>Withdrawal requests</h2></div></div><div id="withdrawals" class="list"></div></section>
-<p class="warning">This admin page uses browser localStorage. It is a frontend prototype, not secure authentication for real-money operations, and uploaded images stay only in the same browser until a real backend/storage service is connected.</p>
-</main><div id="toast"></div><script src="admin.js"></script>
+<p class="warning">Frontend prototype: browser localStorage is used for this demo. It is not secure authentication or a shared production database, and GitHub Pages is not suitable for operating a real-money commercial service. </p>
+</main><div id="toast"></div><script src="admin.js"></script><script src="admin-features.js"></script>
 </body></html>
