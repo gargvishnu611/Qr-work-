@@ -9,110 +9,36 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="simple.css">
 </head>
 <body>
   <div id="toast" class="toast" role="status"></div>
-
   <section id="auth" class="auth-screen">
     <div class="auth-card">
       <div class="brand"><div class="brand-mark">QR</div><div><strong>QR Work</strong><span>Simple testing workspace</span></div></div>
-      <div class="auth-copy">
-        <span class="eyebrow">WELCOME</span>
-        <h1>Test QR tasks.<br>Track your earnings.</h1>
-        <p>Complete authorized tasks, check your status and manage your payout details from one simple dashboard.</p>
-      </div>
-      <form id="loginForm">
-        <label>Email<input id="email" type="email" placeholder="you@example.com" autocomplete="email" required></label>
-        <label>Password<input id="password" type="password" placeholder="••••••••" autocomplete="current-password" minlength="4" required></label>
-        <button class="btn primary full" type="submit">Continue</button>
-      </form>
+      <div class="auth-copy"><span class="eyebrow">WELCOME</span><h1>Test QR tasks.<br>Track your earnings.</h1><p>Complete authorized tasks, check your status and manage your payout details from one simple dashboard.</p></div>
+      <form id="loginForm"><label>Email<input id="email" type="email" placeholder="you@example.com" autocomplete="email" required></label><label>Password<input id="password" type="password" placeholder="••••••••" autocomplete="current-password" minlength="4" required></label><button class="btn primary full" type="submit">Continue</button></form>
       <p class="note">Demo frontend only. Use a real authentication provider before handling real accounts or money.</p>
     </div>
   </section>
-
   <section id="app" class="hidden">
-    <header class="topbar">
-      <a class="brand brand-link" href="#dashboard" aria-label="QR Work home"><div class="brand-mark">QR</div><div><strong>QR Work</strong><span>Testing workspace</span></div></a>
-      <div class="top-actions"><span class="online"><i></i>Online</span><button class="avatar" id="topAvatar" aria-label="Account">T</button><button class="logout" id="logoutBtn">Log out</button></div>
-    </header>
-
+    <header class="topbar"><a class="brand brand-link" href="#dashboard" aria-label="QR Work home"><div class="brand-mark">QR</div><div><strong>QR Work</strong><span>Testing workspace</span></div></a><div class="top-actions"><span class="online"><i></i>Online</span><button class="avatar" id="topAvatar" aria-label="Account">T</button><button class="logout" id="logoutBtn">Log out</button></div></header>
     <main class="container">
-      <section class="welcome-row">
-        <div><span class="eyebrow">YOUR WORKSPACE</span><h2 id="userName">Tester</h2><p id="userRole">Active account</p></div>
-        <div class="account-badge"><span class="dot"></span><span id="accountStatus">Approved</span></div>
-      </section>
-
-      <nav class="tabs" aria-label="Main navigation">
-        <button class="tab active" data-page="dashboard">Dashboard</button>
-        <button class="tab" data-page="work">QR Work</button>
-        <button class="tab" data-page="status">Status</button>
-        <button class="tab" data-page="payout">Payout</button>
-      </nav>
-
+      <section class="welcome-row"><div><span class="eyebrow">YOUR WORKSPACE</span><h2 id="userName">Tester</h2><p id="userRole">Active account</p></div><div class="account-badge"><span class="dot"></span><span id="accountStatus">Approved</span></div></section>
+      <nav class="tabs" aria-label="Main navigation"><button class="tab active" data-page="dashboard">Dashboard</button><button class="tab" data-page="work">QR Work</button><button class="tab" data-page="status">Status</button><button class="tab" data-page="payout">Payout</button></nav>
       <section id="dashboard" class="page">
-        <div class="balance-card">
-          <div><span class="eyebrow light">AVAILABLE BALANCE</span><div class="balance" id="balance">₹0.00</div></div>
-          <div class="rate">₹<b id="rateValue">25</b> / accepted QR</div>
-          <div class="balance-info"><div><span>Rate per QR</span><b>₹<span id="rateSmall">25</span></b></div><div><span>Minimum withdrawal</span><b>₹<span id="minWithdraw">50</span></b></div></div>
-        </div>
-
-        <div class="stats-grid">
-          <div class="stat"><span>Requests</span><strong id="requests">0</strong></div>
-          <div class="stat"><span>Accepted</span><strong class="green" id="accepted">0</strong></div>
-          <div class="stat"><span>Rejected</span><strong class="red" id="rejected">0</strong></div>
-          <div class="stat"><span>Expired</span><strong class="amber" id="expired">0</strong></div>
-        </div>
-
-        <div class="two-col">
-          <div class="card">
-            <div class="card-head"><div><span class="eyebrow">GET STARTED</span><h3>Ready for a task?</h3></div><span class="small-badge" id="queuePill">0 open</span></div>
-            <p>Open an available task, scan the authorized QR, complete the test and wait for review.</p>
-            <button class="btn primary" data-go="work">View available work</button>
-          </div>
-          <div class="card">
-            <div class="card-head"><div><span class="eyebrow">RECENT</span><h3>Activity</h3></div><button class="text-btn" data-go="status">View all</button></div>
-            <div id="recent" class="recent"><p class="muted">No activity yet.</p></div>
-          </div>
-        </div>
-
-        <div class="card referral-card">
-          <div><span class="eyebrow">REFERRAL</span><h3>Your referral code</h3><p>Share this code with people who choose to use the service.</p></div>
-          <strong id="refCode">QW-000000</strong><button class="btn secondary" data-copy="refCode">Copy</button>
-        </div>
+        <div class="balance-card"><div><span class="eyebrow light">AVAILABLE BALANCE</span><div class="balance" id="balance">₹0.00</div></div><div class="rate">₹<b id="rateValue">25</b> / accepted QR</div><div class="balance-info"><div><span>Rate per QR</span><b>₹<span id="rateSmall">25</span></b></div><div><span>Minimum withdrawal</span><b>₹<span id="minWithdraw">50</span></b></div></div></div>
+        <div class="stats-grid"><div class="stat"><span>Requests</span><strong id="requests">0</strong></div><div class="stat"><span>Accepted</span><strong class="green" id="accepted">0</strong></div><div class="stat"><span>Rejected</span><strong class="red" id="rejected">0</strong></div><div class="stat"><span>Expired</span><strong class="amber" id="expired">0</strong></div></div>
+        <div class="two-col"><div class="card"><div class="card-head"><div><span class="eyebrow">GET STARTED</span><h3>Ready for a task?</h3></div><span class="small-badge" id="queuePill">0 open</span></div><p>Open an available task, scan the authorized QR, complete the test and wait for review.</p><button class="btn primary" data-go="work">View available work</button></div><div class="card"><div class="card-head"><div><span class="eyebrow">RECENT</span><h3>Activity</h3></div><button class="text-btn" data-go="status">View all</button></div><div id="recent" class="recent"><p class="muted">No activity yet.</p></div></div></div>
+        <div class="card referral-card"><div><span class="eyebrow">REFERRAL</span><h3>Your referral code</h3><p>Share this code with people who choose to use the service.</p></div><strong id="refCode">QW-000000</strong><button class="btn secondary" data-copy="refCode">Copy</button></div>
         <div class="card account-card"><div><span class="eyebrow">ACCOUNT ID</span><h3>Your account identifier</h3></div><strong id="accountId">USR-000000</strong><button class="btn secondary" data-copy="accountId">Copy</button></div>
       </section>
-
-      <section id="work" class="page hidden">
-        <div class="page-head"><div><span class="eyebrow">QR WORK</span><h1>Available tasks</h1><p>Only use QR codes supplied for authorized testing. Never enter passwords, OTPs or UPI PINs.</p></div><span class="small-badge" id="workQueue">0 open</span></div>
-        <div id="taskList" class="task-list"></div>
-        <div id="activeWork" class="active-work hidden"></div>
-      </section>
-
-      <section id="status" class="page hidden">
-        <div class="page-head"><span class="eyebrow">STATUS</span><h1>Your task history</h1><p>See what is running, submitted and reviewed.</p></div>
-        <div id="statusGrid" class="status-grid"></div>
-        <div class="card"><div class="card-head"><h3>Recent tasks</h3></div><div id="historyTable" class="history"></div></div>
-      </section>
-
-      <section id="payout" class="page hidden">
-        <div class="page-head"><span class="eyebrow">PAYOUT</span><h1>Payout details</h1><p>Save one payout destination and request your available balance when eligible.</p></div>
-        <div class="two-col payout-layout">
-          <form id="payoutForm" class="card form-card">
-            <label>UPI ID<input id="upi" placeholder="yourname@upi"></label>
-            <label>USDT Wallet (BEP20)<input id="usdt" placeholder="0x..."></label>
-            <label>Binance Pay ID<input id="binance" placeholder="123456789"></label>
-            <label>PayPal ID<input id="paypal" type="email" placeholder="you@example.com"></label>
-            <button class="btn primary" type="submit">Save payout details</button>
-          </form>
-          <div class="card withdrawal-card"><span class="eyebrow">WITHDRAWAL</span><h3>Available now</h3><div class="withdraw-amount" id="withdrawBalance">₹0.00</div><p>Minimum withdrawal: <b>₹<span id="withdrawMin">50</span></b></p><button class="btn primary full" id="withdrawBtn">Request withdrawal</button><div class="withdraw-note" id="withdrawNote">No pending withdrawal.</div></div>
-        </div>
-      </section>
-
+      <section id="work" class="page hidden"><div class="page-head"><div><span class="eyebrow">QR WORK</span><h1>Available tasks</h1><p>Only use QR codes supplied for authorized testing. Never enter passwords, OTPs or UPI PINs.</p></div><span class="small-badge" id="workQueue">0 open</span></div><div id="taskList" class="task-list"></div><div id="activeWork" class="active-work hidden"></div></section>
+      <section id="status" class="page hidden"><div class="page-head"><span class="eyebrow">STATUS</span><h1>Your task history</h1><p>See what is running, submitted and reviewed.</p></div><div id="statusGrid" class="status-grid"></div><div class="card"><div class="card-head"><h3>Recent tasks</h3></div><div id="historyTable" class="history"></div></div></section>
+      <section id="payout" class="page hidden"><div class="page-head"><span class="eyebrow">PAYOUT</span><h1>Payout details</h1><p>Save one payout destination and request your available balance when eligible.</p></div><div class="two-col payout-layout"><form id="payoutForm" class="card form-card"><label>UPI ID<input id="upi" placeholder="yourname@upi"></label><label>USDT Wallet (BEP20)<input id="usdt" placeholder="0x..."></label><label>Binance Pay ID<input id="binance" placeholder="123456789"></label><label>PayPal ID<input id="paypal" type="email" placeholder="you@example.com"></label><button class="btn primary" type="submit">Save payout details</button></form><div class="card withdrawal-card"><span class="eyebrow">WITHDRAWAL</span><h3>Available now</h3><div class="withdraw-amount" id="withdrawBalance">₹0.00</div><p>Minimum withdrawal: <b>₹<span id="withdrawMin">50</span></b></p><button class="btn primary full" id="withdrawBtn">Request withdrawal</button><div class="withdraw-note" id="withdrawNote">No pending withdrawal.</div></div></div></section>
       <footer>QR Work is a frontend task workspace. Connect a backend, database, authentication and payment provider before production use.</footer>
     </main>
   </section>
-
   <script src="app.js"></script>
 </body>
 </html>
